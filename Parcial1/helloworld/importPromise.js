@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const promiseText = new Promise((resolve, reject) => {
   setTimeout(() => {
     reject('Promise error');
@@ -23,3 +25,7 @@ export const wait2SecondsAsync = (showResolve = true) => {
 
   return promise;
 };
+
+export const resApi = axios.create({
+  baseURL: 'https://reqres.in/api'
+});

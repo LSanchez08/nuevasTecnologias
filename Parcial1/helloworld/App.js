@@ -1,7 +1,10 @@
+
+import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { promiseText, wait2Seconds, wait2SecondsAsync } from './importPromise';
+
+import { promiseText, resApi, wait2Seconds, wait2SecondsAsync } from './importPromise';
 
 export default function App() {
   // const test = 25;
@@ -35,11 +38,15 @@ export default function App() {
 
   const [ test, setTest ] = useState('Loading...');
   const [test2, setTest2] = useState('test');
+  const [users, setUsers] = useState([]);
+  
 
   const waitPlease = async (showResolve) => {
     try {
       const result = await wait2SecondsAsync(true);
+      const { data: { data } } = await resApi.get('/users');
 
+      setUsers(data);
       setTest(result);
     } catch (error) {
       setTest(`Catch: ${error}`)
@@ -59,6 +66,7 @@ export default function App() {
       <StatusBar style='auto' />
       <Text>{test}</Text>
       <Text>{test2}</Text>
+      <Text>{JSON.stringify(users, null, 2)}</Text>
       {/* <Text>El valor del test es: {test}</Text>
       <Text>Objeto: {JSON.stringify(user, null, 2)}</Text>
       <Text>Objeto: {JSON.stringify(user2, null, 2)}</Text> */}
