@@ -1,23 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { User, UserContext } from '../../imports/userContext';
 
-interface HelloAttributes {
-  text: string,
-  setText?: Function
-};
 
-export default function Hello({ text, setText } : HelloAttributes) {
+export default function ContextTest() {
 
-  useEffect(() => {
-    setTimeout(() => {
-      setText && setText('Hola Mundo from Hello');
-    }, 5000);
-  }, [setText]);
-
+  const { id, name, age, address } = useContext<User>(UserContext);
   return (
     <View style={styles.container}>
-      <Text style={styles.sectionTitle}>{text}</Text>
+      <Text style={styles.sectionTitle}>{`${id} ${name} ${age} ${address}`}</Text>
       <StatusBar style="auto" />
     </View>
   );
