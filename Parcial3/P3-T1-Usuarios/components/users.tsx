@@ -12,8 +12,8 @@ interface UsersNavigation {
 
 export default function Users({navigation}: UsersNavigation) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.paragraph}>Users</Text>
+    <View >
+      <Text >Users</Text>
       {
         users.map(({ name, phone }, ix) => 
           (
